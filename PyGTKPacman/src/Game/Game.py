@@ -25,53 +25,53 @@ class Game:
 	oWindow = None;
 	oEnemies= [];
 	oCookies= [];
-	__isRunning = False;
+	_isRunning = False;
 
 	def __init__(self, title, size):
 		self.oCanvas = Canvas();
 		self.oWindow = Window(title, size, self);
  	pass # /__init__
 
-	def __redraw(self):
+	def _redraw(self):
 		self.oCanvas.drawPlayer(self.oPlayer);
 		self.oCanvas.drawEnemies(self.oEnemies);
 		self.oCanvas.drawCookies(self.oCookies);
 		self.oCanvas.draw();
-	pass # /__redraw
+	pass # /_redraw
 
-	def __gameLoop(self):
+	def _gameLoop(self):
 		if True == self.isRunning() :
-			self.__redraw();
-			gobject.timeout_add(20, self.__gameLoop);
+			self._redraw();
+			gobject.timeout_add(20, self._gameLoop);
 		pass # /if
-	pass #/__gameLoop
+	pass #/_gameLoop
 
-	def __createEnemies(self):
-		pass
+	def _createEnemies(self):
+		self.oEnemies= [];
 	pass
 
-	def __createCookies(self):
-		pass
+	def _createCookies(self):
+		self.oCookies= [];
 	pass
 
-	def __createWorld(self):
+	def _createWorld(self):
 		self.oPlayer = Player(100, 100);
-		self.oEnemies = self.__createEnemies()
-		self.oCookies = self.__createCookies();
-	pass #/__createWorld
+		self.oEnemies = self._createEnemies()
+		self.oCookies = self._createCookies();
+	pass #/_createWorld
 
 	def isRunning(self):
-		return self.__isRunning;
+		return self._isRunning;
 	pass
 
-	def __run(self) :
-		self.__isRunning = True;
+	def _run(self) :
+		self._isRunning = True;
 	pass # /run
 
 	def start(self):
-		self.__run();
-		self.__createWorld();
-		self.__gameLoop();
+		self._run();
+		self._createWorld();
+		self._gameLoop();
 	pass # /start
 
 	def restart(self) :
@@ -79,11 +79,11 @@ class Game:
 		if self.oWindow.question('Nowa Gra?') == True :
 			self.start();
 		pass
-		self.__run();
+		self._run();
 	pass # /restart
 
 	def stop(self) :
-		self.__isRunning = False;
+		self._isRunning = False;
 	pass #/stop
 
 pass # /Game

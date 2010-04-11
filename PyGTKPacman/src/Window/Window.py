@@ -27,12 +27,12 @@ class Window(gtk.Window):
 	def __init__(self, title, size, game):
 		self.oGame = game;
 		gtk.Window.__init__(self)
-		self.__windowSetUp(title, size);
-		self.__addMainVBox();
-		self.__addMenu();
-		self.__addCanvas();
+		self._windowSetUp(title, size);
+		self._addMainVBox();
+		self._addMenu();
+		self._addCanvas();
 		self.show_all();
-		self.__addEventListeners();
+		self._addEventListeners();
 	pass
 
 	def question(self, message):
@@ -48,45 +48,44 @@ class Window(gtk.Window):
 		return result;
 	pass
 
-	def __addCanvas(self) :
+	def _addCanvas(self) :
 		self.oCanvas = self.oGame.oCanvas;
 		self.oVBox.pack_start(self.oCanvas);
 		self.oCanvas.show();
 	pass
 
 
-	def __addMenu(self) :
+	def _addMenu(self) :
 		self.oMenu = Menu(self);
 		self.oVBox.pack_start(self.oMenu.oMenuBar, False, True, 0);
 		self.oMenu.oMenuBar.show();
 	pass
 
-	def __windowSetUp(self, title, size) :
+	def _windowSetUp(self, title, size) :
 		self.set_title(title);
 		self.set_size_request(size['w'], size['h']);
 	pass
 
-	def __addMainVBox(self) :
+	def _addMainVBox(self) :
 		self.oVBox = gtk.VBox(False, 1);
 		self.oVBox.show();
 		self.add(self.oVBox);
 	pass
 
-	def __addEventListeners(self) :
-		self.attachEvent("destroy", self.__closeWindow);
-		self.attachEvent('key-press-event', self.__keybordEvents);
-		self.attachEvent('key-release-event', self.__keybordEvents);
+	def _addEventListeners(self) :
+		self.attachEvent("destroy", self._closeWindow);
+		self.attachEvent('key-press-event', self._keybordEvents);
 	pass
 
 	def attachEvent(self, event, handler, data = None) :
 		self.connect(event, handler, data);
 	pass
 
-	def __closeWindow(self, window, event, data = None) :
+	def _closeWindow(self, window, event, data = None) :
 		gtk.main_quit();
 	pass
 
-	def __keybordEvents(self, window, event, data = None) :
+	def _keybordEvents(self, window, event, data = None) :
 		keyval = event.keyval;
 		if self.keyPressed('left', keyval) :
 			self.moveLeft();

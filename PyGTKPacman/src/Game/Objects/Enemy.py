@@ -7,14 +7,8 @@ __date__    = "$2010-04-11 18:05:03$";
 
 class Enemy(Character) :
 
-	ErrorMsg = 'To jedynie interfejs. Nie należy tworzyć obiketów klasy Game.Objects.Object';
-
-	def __init(self):
-		raise NotImplementedException(ErrorMsg);
-	pass
-
-	def draw(self, canvas):
-		raise NotImplementedException(ErrorMsg);
+	def __init__(self, x, y):
+		Character.__init__(self, x, y);
 	pass
 
 pass
