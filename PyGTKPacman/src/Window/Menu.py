@@ -6,7 +6,7 @@ from Forms import *
 
 __version__ = "0.1"
 __author__  = "Patryk yarpo Jar <jar.patryk@gmail.com>"
-__date__ ="$2010-04-11 13:04:12$"
+__date__    = "$2010-04-11 13:04:12$"
 
 
 class Menu :
@@ -49,7 +49,7 @@ class Menu :
 	pass
 
 	def _createMainMenu(self):
-		window = self.oWindow.oWindow;
+		window = self.oWindow;
 		accel_group = gtk.AccelGroup()
 		item_factory = gtk.ItemFactory(gtk.MenuBar, "<main>", accel_group)
 		item_factory.create_items(self.menu_items)
