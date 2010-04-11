@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from Graphics.Canvas import *
+from Objects.Player import *
 from Window.Window import *
 import gobject
 import pygtk
@@ -28,27 +29,39 @@ class Game:
 
 	def __init__(self, title, size):
 		self.oCanvas = Canvas();
-		self.oWindow = Window(	title, size, self);
+		self.oWindow = Window(title, size, self);
  	pass # /__init__
 
 	def __redraw(self):
 		#print "odrysowuje co mam odrysowac"
+		#self.oPlayer.draw(self.oCanvas.getContext());
 		self.oCanvas.draw();
 	pass # /__redraw
 
 	def __gameLoop(self):
-		if True == self.__isRunning :
+		if True == self.isRunning() :
 			self.__redraw();
 			gobject.timeout_add(20, self.__gameLoop);
 		pass # /if
 	pass #/__gameLoop
 
+	def __createEnemies(self):
+		pass
+	pass
+
+	def __createCookies(self):
+		pass
+	pass
+
 	def __createWorld(self):
-		print "Stworzono swiat gry"
-		# self.oPlayer = Player();
-		# self.oEnemies = self.__createEnemies()
-		# self.oCookies = self.__createCookies();
+		self.oPlayer = Player(0, 0);
+		self.oEnemies = self.__createEnemies()
+		self.oCookies = self.__createCookies();
 	pass #/__createWorld
+
+	def isRunning(self):
+		return self.__isRunning;
+	pass
 
 	def __run(self) :
 		self.__isRunning = True;

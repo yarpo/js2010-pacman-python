@@ -84,13 +84,13 @@ class Window(gtk.Window):
 		keyval = event.keyval;
 		mod = gtk.accelerator_get_label(keyval, event.state);
 		if ('Lewo' == mod) :
-			self.oCanvas.x -= 0.5;
+			self.oGame.oCanvas.x -= 0.5;
 		elif ('Prawo' == mod) :
-			self.oCanvas.x += 0.5;
+			self.oGame.oCanvas.x += 0.5;
 		elif ('Góra' == mod) :
-			self.oCanvas.y -= 0.5;
+			self.oGame.oCanvas.y -= 0.5;
 		elif ('Dół' == mod) :
-			self.oCanvas.y += 0.5;
+			self.oGame.oCanvas.y += 0.5;
 		pass
 	pass
 pass # klasa
