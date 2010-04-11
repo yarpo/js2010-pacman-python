@@ -10,9 +10,9 @@ __date__    = "$2010-04-11 13:04:19$"
 __version__ = "0.1"
 __author__  = "Patryk yarpo Jar <jar.patryk@gmail.com>"
 
-class Window:
+class Window(gtk.Window):
 
-	oWindow	= None;
+	#oWindow	= None;
 	oGame	= None;
 	oMenu	= None;
 	oVBox	= None;
@@ -20,11 +20,12 @@ class Window:
 
 	def __init__(self, title, size, game):
 		self.oGame = game;
+		gtk.Window.__init__(self)
 		self.__windowSetUp(title, size);
 		self.__addMainVBox();
 		self.__addMenu();
 		self.__addCanvas();
-		self.oWindow.show_all();
+		self.show_all();
 		self.__addEventListeners();
 	pass
 
@@ -55,15 +56,14 @@ class Window:
 	pass
 
 	def __windowSetUp(self, title, size) :
-		self.oWindow = gtk.Window(gtk.WINDOW_TOPLEVEL);
-		self.oWindow.set_title(title);
-		self.oWindow.set_size_request(size['w'], size['h']);
+		self.set_title(title);
+		self.set_size_request(size['w'], size['h']);
 	pass
 
 	def __addMainVBox(self) :
 		self.oVBox = gtk.VBox(False, 1);
 		self.oVBox.show();
-		self.oWindow.add(self.oVBox);
+		self.add(self.oVBox);
 	pass
 
 	def __addEventListeners(self) :
@@ -73,7 +73,7 @@ class Window:
 	pass
 
 	def attachEvent(self, event, handler, data = None) :
-		self.oWindow.connect(event, handler, data);
+		self.connect(event, handler, data);
 	pass
 
 	def __closeWindow(self, window, event, data = None) :
@@ -92,6 +92,5 @@ class Window:
 		elif ('Dół' == mod) :
 			self.oCanvas.y += 0.5;
 		pass
-		#print "naciśnięto / puszczono ", mod;
 	pass
 pass # klasa
