@@ -7,14 +7,20 @@ __date__    = "$2010-04-11 18:05:03$";
 
 class Object :
 
-	ErrorMsg = 'To jedynie interfejs. Nie należy tworzyć obiketów klasy Game.Objects.Object';
+	_x = 0;
+	_y = 0;
 
-	def __init(self):
-		raise NotImplementedException(ErrorMsg);
+	def __init__(self, x, y):
+		self._x = x;
+		self._y = y;
 	pass
 
-	def draw(self, canvas):
-		raise NotImplementedException(ErrorMsg);
+	def getX(self):
+		return self._x;
+	pass
+
+	def getY(self):
+		return self._y;
 	pass
 
 pass

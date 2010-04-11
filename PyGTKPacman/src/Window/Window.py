@@ -12,7 +12,13 @@ __author__  = "Patryk yarpo Jar <jar.patryk@gmail.com>"
 
 class Window(gtk.Window):
 
-	#oWindow	= None;
+	KEY = {
+		'up'	: 65362,
+		'right' : 65363,
+		'down'	: 65364,
+		'left'	: 65361
+	};
+
 	oGame	= None;
 	oMenu	= None;
 	oVBox	= None;
@@ -82,15 +88,41 @@ class Window(gtk.Window):
 
 	def __keybordEvents(self, window, event, data = None) :
 		keyval = event.keyval;
-		mod = gtk.accelerator_get_label(keyval, event.state);
-		if ('Lewo' == mod) :
-			self.oGame.oCanvas.x -= 0.5;
-		elif ('Prawo' == mod) :
-			self.oGame.oCanvas.x += 0.5;
-		elif ('Góra' == mod) :
-			self.oGame.oCanvas.y -= 0.5;
-		elif ('Dół' == mod) :
-			self.oGame.oCanvas.y += 0.5;
+		if self.keyPressed('left', keyval) :
+			self.moveLeft();
+		elif self.keyPressed('right', keyval) :
+			self.moveRight();
+		elif self.keyPressed('up', keyval) :
+			self.moveUp();
+		elif self.keyPressed('down', keyval) :
+			self.moveDown();
 		pass
 	pass
+
+	def moveDown(self):
+		self.oGame.oPlayer.down();
+		#self.oGame.oCanvas.y += 0.5;
+	pass
+
+	def moveUp(self):
+		self.oGame.oPlayer.up();
+		#self.oGame.oCanvas.y -= 0.5;
+	pass
+
+	def moveLeft(self):
+		self.oGame.oPlayer.left();
+		#self.oGame.oCanvas.x -= 0.5;
+	pass
+
+	def moveRight(self):
+		self.oGame.oPlayer.right();
+		#self.oGame.oCanvas.x += 0.5;
+	pass
+
+	def keyPressed(self, key, val):
+		if self.KEY[key] == val :
+			return True;
+		return False;
+	pass
+
 pass # klasa

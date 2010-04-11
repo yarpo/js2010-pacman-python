@@ -33,8 +33,9 @@ class Game:
  	pass # /__init__
 
 	def __redraw(self):
-		#print "odrysowuje co mam odrysowac"
-		#self.oPlayer.draw(self.oCanvas.getContext());
+		self.oCanvas.drawPlayer(self.oPlayer);
+		self.oCanvas.drawEnemies(self.oEnemies);
+		self.oCanvas.drawCookies(self.oCookies);
 		self.oCanvas.draw();
 	pass # /__redraw
 
@@ -54,7 +55,7 @@ class Game:
 	pass
 
 	def __createWorld(self):
-		self.oPlayer = Player(0, 0);
+		self.oPlayer = Player(100, 100);
 		self.oEnemies = self.__createEnemies()
 		self.oCookies = self.__createCookies();
 	pass #/__createWorld

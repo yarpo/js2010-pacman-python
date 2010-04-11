@@ -9,17 +9,55 @@ __date__    = "$2010-04-11 18:05:03$";
 
 class Character(Object) :
 
-	iX = 0;
-	iY = 0;
+	STEP_X = 0.5;
+	STEP_Y = 0.5;
+	MAX_X = 200;
+	MAX_Y = 200;
 
 	def __init__(self, x, y):
-		
-		self.iX = x;
-		self.iY = y;
+		Object.__init__(self, x,y);
 	pass
 
-	def draw(self, canvas):
-		raise NotImplementedException(ErrorMsg);
+	def up(self):
+		if self.posibleMoveY(-self.STEP_Y) :
+			self._y -= self.STEP_Y;
+		pass
+	pass
+
+	def down(self):
+		if self.posibleMoveY(self.STEP_Y) :
+			self._y += self.STEP_Y;
+		pass
+	pass
+
+	def left(self):
+		if self.posibleMoveX(-self.STEP_X) :
+			self._x -= self.STEP_X;
+		pass
+	pass
+
+	def right(self):
+		if self.posibleMoveX(self.STEP_X) :
+			self._x += self.STEP_X;
+		pass
+	pass
+
+	def posibleMoveX(self, step):
+		result = self._x + step;
+
+		if result < 0 or result > self.MAX_X :
+			return False;
+		pass
+		return True;
+	pass
+
+	def posibleMoveY(self, step):
+		result = self._y + step;
+
+		if result < 0 or result > self.MAX_Y :
+			return False;
+		pass
+		return True;
 	pass
 
 pass
