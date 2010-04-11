@@ -5,10 +5,7 @@ __version__ = "0.1";
 __author__  = "Patryk yarpo Jar <jar.patryk@gmail.com>";
 __date__    = "$2010-04-11 18:05:03$";
 
-class Bonus(Object) :
-
-	_iX;
-	_iY;
+class Cookie(Bonus) :
 
 	def __init(self, x, y):
 		self._iX = x;
@@ -16,7 +13,7 @@ class Bonus(Object) :
 	pass
 
 	def draw(self, canvas):
-		raise NotImplementedException(ErrorMsg);
+		print "rysuje ciasteczko"
 	pass
 
 pass
