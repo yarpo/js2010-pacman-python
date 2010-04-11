@@ -1,51 +1,76 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import pygtk;
-import gobject;
+from Graphics.Canvas import *
+from Window.Window import *
+import gobject
+import pygtk
+
+
 pygtk.require('2.0');
 
 __version__ = "0.1";
 __author__  = "Patryk yarpo Jar <jar.patryk@gmail.com>";
-__date__    ="$2010-04-11 13:05:03$";
+__date__    = "$2010-04-11 13:05:03$";
 
 class Game:
 
+	DEFAULTS = {
+				'iLives' : 3,
+				'iEnemies' :3
+	};
 	oCanvas	= None;
 	oPlayer = None;
+	oWindow = None;
 	oEnemies= [];
 	oCookies= [];
 	__isRunning = False;
 
-	def __init__(self, canvas):
-		self.oCanvas = canvas;
-  		print "dziala Game"
-	pass # /__init__
+	def __init__(self, title, size):
+		self.oCanvas = Canvas();
+		self.oWindow = Window(	title, size, self);
+ 	pass # /__init__
 
 	def __redraw(self):
-		print "odrysowuje co mam odrysowac"
-		#self.oCanvas.draw()
+		#print "odrysowuje co mam odrysowac"
+		self.oCanvas.draw();
 	pass # /__redraw
 
 	def __gameLoop(self):
 		if True == self.__isRunning :
-			self.__redraw()
-			gobject.timeout_add(100, self.__gameLoop)
+			self.__redraw();
+			gobject.timeout_add(20, self.__gameLoop);
 		pass # /if
 	pass #/__gameLoop
 
 	def __createWorld(self):
 		print "Stworzono swiat gry"
+		# self.oPlayer = Player();
+		# self.oEnemies = self.__createEnemies()
+		# self.oCookies = self.__createCookies();
 	pass #/__createWorld
 
-	def start(self):
+	def __run(self) :
 		self.__isRunning = True;
-		self.__createWorld()
-		self.__gameLoop()
+	pass # /run
+
+	def start(self):
+		self.__run();
+		self.__createWorld();
+		self.__gameLoop();
 	pass # /start
+
+	def restart(self) :
+		self.stop();
+		if self.oWindow.question('Nowa Gra?') == True :
+			self.start();
+		pass
+		self.__run();
+	pass # /restart
 
 	def stop(self) :
 		self.__isRunning = False;
 	pass #/stop
 
 pass # /Game
+
