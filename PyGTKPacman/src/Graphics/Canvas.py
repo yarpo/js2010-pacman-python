@@ -14,19 +14,39 @@ class Canvas(gtk.DrawingArea):
 	_oPlayer  = None;
 	_oEnemies = None;
 	_oCookies = None;
+	_width    = 0;
+	_height   = 0;
 
-	def __init__(self):
+	def __init__(self, size):
 		gtk.DrawingArea.__init__(self);
-		self.connect("expose-event", self.expose)
+		self.resize(size['width'], size['height']);
+		self.connect("expose-event", self.expose);
+	pass
+
+	def resize(self, x, y):
+		self._width = x;
+		self._height = y;
+		self.set_size_request(x, y);
+	pass
+
+	def getWidth(self):
+		return self._width;
+	pass
+
+
+	def getHeight(self):
+		return self._height;
+	pass
+
+	def redraw(self, game):
+		self.drawPlayer(game.oPlayer);
+		self.drawEnemies(game.oEnemies);
+		self.drawCookies(game.oCookies);
+		self.draw();
 	pass
 
 	def getContext(self):
 		return self.window.cairo_create()
-	pass
-
-	def passPlayer(self, player):
-		self.pl = player;
-		#self.drawPlayer(self.pl)
 	pass
 
 	def _drawPlayer(self):
@@ -60,15 +80,19 @@ class Canvas(gtk.DrawingArea):
 		pass
 	pass
 
+	def _drawBackground(self) :
+		cr = self.getContext();
+		cr.set_source_rgb(0.5, 0.5, 0.5);
+		cr.rectangle(0, 0, self.getWidth(), self.getHeight());
+		cr.fill()
+	pass
 
 	def expose(self, *args):
+		self._drawBackground();
 		self._drawPlayer();
 		self._drawEnemies();
 		self._drawCookies();
 		self._reset();
-		return False;
-		#pass
-		#self.drawPlayer();
 	pass
 	
 	def _reset(self):
