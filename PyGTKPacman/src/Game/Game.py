@@ -5,6 +5,7 @@ from Graphics.Canvas import *
 from Objects.Character import *
 from Objects.Player import *
 from Objects.Enemy import *
+from Objects.Cookie import *
 from Window.Window import *
 import gobject
 import pygtk
@@ -56,13 +57,18 @@ class Game:
 		i = 0
 		while i < n:
 			self.oEnemies.append(Enemy(i*100, i*50));
-			print 'Stworzylem enemy: ', self.oEnemies[i].getX(),self.oEnemies[i].getY(),
 			i += 1;
 		pass
 	pass
 
 	def _createCookies(self):
-		self.oCookies= [];
+		self.oCookies = [];
+		n = 10;
+		i = 0
+		while i < n:
+			self.oCookies.append(Cookie(i*100, i*50));
+			i += 1;
+		pass
 	pass
 
 	def _createWorld(self):
