@@ -9,10 +9,10 @@ __date__    = "$2010-04-11 18:05:03$";
 
 class Character(Object) :
 
-	STEP_X = 0.5;
-	STEP_Y = 0.5;
-	MAX_X = 200;
-	MAX_Y = 200;
+	STEP_X = 2.5;
+	STEP_Y = 2.5;
+	MAX_X = 0;
+	MAX_Y = 0;
 
 	def __init__(self, x, y):
 		Object.__init__(self, x,y);
@@ -58,6 +58,12 @@ class Character(Object) :
 			return False;
 		pass
 		return True;
+	pass
+
+	@staticmethod
+	def setPlaygroundBounds(ps):
+		Character.MAX_X = ps['width'];
+		Character.MAX_Y = ps['height'];
 	pass
 
 pass
