@@ -138,13 +138,24 @@ class Canvas(gtk.DrawingArea):
 
 	def _drawWalls(self):
 		self._drawVerticalWall(1, 1, 12);
-		self._drawVerticalWall(3, 1, 12);
-		self._drawVerticalWall(5, 1, 12);
-		self._drawVerticalWall(7, 1, 12);
-		self._drawVerticalWall(9, 1, 12);
-		self._drawVerticalWall(11, 1, 12);
+		self._drawVerticalWall(3, 0, 3);
+		self._drawVerticalWall(3, 4, 3);
+		self._drawVerticalWall(3, 8, 3);
+		self._drawVerticalWall(3, 12, 2);
+		self._drawVerticalWall(11, 0, 3);
+		self._drawVerticalWall(11, 4, 3);
+		self._drawVerticalWall(11, 8, 3);
+		self._drawVerticalWall(11, 12, 2);
 		self._drawVerticalWall(13, 1, 12);
-		self._drawVerticalWall(15, 1, 12);
+
+		self._drawHorizontalWall(5, 1, 5);
+		self._drawHorizontalWall(5, 3, 5);
+		self._drawHorizontalWall(5, 5, 5);
+
+		self._drawHorizontalWall(5, 8, 5);
+		self._drawHorizontalWall(5, 10, 5);
+		self._drawHorizontalWall(5, 12, 5);
+
 	pass
 
 	def expose(self, *args):
