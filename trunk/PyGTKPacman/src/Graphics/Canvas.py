@@ -68,7 +68,20 @@ class Canvas(gtk.DrawingArea):
 		self._oEnemies = enemies;
 	pass
 
+	def _drawEnemy(self, enemy):
+		x = enemy.getX();
+		y = enemy.getY();
+		cr = self.getContext();
+		cr.set_line_width(4);
+		cr.arc(x, y, 8, 0, 2 * math.pi);
+		cr.stroke_preserve();
+		cr.set_source_rgb(1, 0, 0);
+		cr.fill();
+	pass
+
 	def _drawEnemies(self):
+		for enemy in self._oEnemies :
+			self._drawEnemy(enemy);
 		pass
 	pass
 

@@ -4,6 +4,7 @@
 from Graphics.Canvas import *
 from Objects.Character import *
 from Objects.Player import *
+from Objects.Enemy import *
 from Window.Window import *
 import gobject
 import pygtk
@@ -51,6 +52,13 @@ class Game:
 
 	def _createEnemies(self):
 		self.oEnemies= [];
+		n = 3;
+		i = 0
+		while i < n:
+			self.oEnemies.append(Enemy(i*100, i*50));
+			print 'Stworzylem enemy: ', self.oEnemies[i].getX(),self.oEnemies[i].getY(),
+			i += 1;
+		pass
 	pass
 
 	def _createCookies(self):
@@ -60,8 +68,8 @@ class Game:
 	def _createWorld(self):
 		Character.setPlaygroundBounds(self.PLAYGROUND_SIZE);
 		self.oPlayer = Player(100, 100, self.DEFAULTS['iLifes']);
-		self.oEnemies = self._createEnemies()
-		self.oCookies = self._createCookies();
+		self._createEnemies()
+		self._createCookies();
 	pass #/_createWorld
 
 	def isRunning(self):
