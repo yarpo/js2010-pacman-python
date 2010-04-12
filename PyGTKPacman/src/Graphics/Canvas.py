@@ -54,7 +54,7 @@ class Canvas(gtk.DrawingArea):
 		y = self._oPlayer.getY();
 		cr = self.getContext();
 		cr.set_line_width(4)
-		cr.arc(x, y, 8, 0, 2 * math.pi)
+		cr.arc(x, y, 20, 0, 2 * math.pi)
 		cr.stroke_preserve()
 		cr.set_source_rgb(1, 1, 1)
 		cr.fill()
@@ -73,7 +73,7 @@ class Canvas(gtk.DrawingArea):
 		y = enemy.getY();
 		cr = self.getContext();
 		cr.set_line_width(4);
-		cr.arc(x, y, 8, 0, 2 * math.pi);
+		cr.arc(x, y, 10, 0, 2 * math.pi);
 		cr.stroke_preserve();
 		cr.set_source_rgb(1, 0, 0);
 		cr.fill();
@@ -89,7 +89,20 @@ class Canvas(gtk.DrawingArea):
 		self._oCookies = cookies;
 	pass
 
+	def _drawCookie(self, cookie):
+		x = cookie.getX();
+		y = cookie.getY();
+		cr = self.getContext();
+		cr.set_line_width(4);
+		cr.arc(x, y, 6, 0, 2 * math.pi);
+		cr.stroke_preserve();
+		cr.set_source_rgb(0.9, 0.8, 0.1);
+		cr.fill();
+	pass
+
 	def _drawCookies(self):
+		for cookie in self._oCookies :
+			self._drawCookie(cookie);
 		pass
 	pass
 
@@ -100,8 +113,16 @@ class Canvas(gtk.DrawingArea):
 		cr.fill()
 	pass
 
+	def _drawWals(self):
+		cr = self.getContext();
+		cr.move_to(10, 10);
+		cr.line_to(30, 30);
+		cr.stroke();
+	pass
+
 	def expose(self, *args):
 		self._drawBackground();
+		self._drawWals();
 		self._drawCookies();
 		self._drawEnemies();
 		self._drawPlayer();
