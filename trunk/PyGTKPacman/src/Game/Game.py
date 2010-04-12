@@ -24,7 +24,7 @@ class Game:
 	};
 	PLAYGROUND_SIZE = {
 		'width'  : 600,
-		'height' : 550
+		'height' : 540
 	};
 	oCanvas	= None;
 	oPlayer = None;
@@ -66,7 +66,7 @@ class Game:
 		n = 10;
 		i = 0
 		while i < n:
-			self.oCookies.append(Cookie(i*100, i*50));
+			self.oCookies.append(Cookie(i*54, i*78));
 			i += 1;
 		pass
 	pass
