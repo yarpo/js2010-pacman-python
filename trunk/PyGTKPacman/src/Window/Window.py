@@ -19,10 +19,12 @@ class Window(gtk.Window):
 		'left'	: 65361
 	};
 
-	oGame	= None;
-	oMenu	= None;
-	oVBox	= None;
-	oCanvas	= None;
+	oGame	  = None;
+	oMenu	  = None;
+	oVBox	  = None;
+	oCanvas	  = None;
+	oLifeBar  = None;
+	oScoreBar = None;
 
 	def __init__(self, title, size, game):
 		self.oGame = game;
@@ -31,6 +33,7 @@ class Window(gtk.Window):
 		self._addMainVBox();
 		self._addMenu();
 		self._addCanvas();
+		self._addBottomBar();
 		self.show_all();
 		self._addEventListeners();
 	pass
@@ -43,9 +46,18 @@ class Window(gtk.Window):
 						 gtk.STOCK_OK, gtk.RESPONSE_ACCEPT))
 		result = md.run();
 		result = (gtk.RESPONSE_OK == result or gtk.RESPONSE_ACCEPT == result);
-
 		md.destroy()
 		return result;
+	pass
+
+	def _addBottomBar(self):
+		hbox = gtk.HBox(False, 5);
+		self.oLifeBar  = gtk.Label("Życia: %d" % 3);
+		self.oScoreBar = gtk.Label("Wynik: %d" % 100);
+		hbox.pack_start(self.oLifeBar);
+		hbox.pack_start(self.oScoreBar);
+		self.oVBox.pack_start(hbox);
+
 	pass
 
 	def _addCanvas(self) :
@@ -64,28 +76,28 @@ class Window(gtk.Window):
 	def _windowSetUp(self, title, size) :
 		self.set_title(title);
 		self.set_size_request(size['w'], size['h']);
-	pass
+	pass # / _windowSetUp
 
 	def _addMainVBox(self) :
 		self.oVBox = gtk.VBox(False, 1);
 		self.oVBox.show();
 		self.add(self.oVBox);
-	pass
+	pass # /_addMainVBox
 
 	def _addEventListeners(self) :
 		self.attachEvent("destroy", self._closeWindow);
-		self.attachEvent('key-press-event', self._keybordEvents);
-	pass
+		self.attachEvent('key-press-event', self._keyboardEvents);
+	pass # /_addEventListeners
 
 	def attachEvent(self, event, handler, data = None) :
 		self.connect(event, handler, data);
-	pass
+	pass # /attacheEvent
 
 	def _closeWindow(self, window, event, data = None) :
 		gtk.main_quit();
-	pass
+	pass # /_closeWindow
 
-	def _keybordEvents(self, window, event, data = None) :
+	def _keyboardEvents(self, window, event, data = None) :
 		keyval = event.keyval;
 		if self.keyPressed('left', keyval) :
 			self.moveLeft();
@@ -95,33 +107,37 @@ class Window(gtk.Window):
 			self.moveUp();
 		elif self.keyPressed('down', keyval) :
 			self.moveDown();
-		pass
-	pass
+		pass # /if
+	pass # /_keyboardEvents
 
 	def moveDown(self):
 		self.oGame.oPlayer.down();
-		#self.oGame.oCanvas.y += 0.5;
-	pass
+	pass # /moveDown
 
 	def moveUp(self):
 		self.oGame.oPlayer.up();
-		#self.oGame.oCanvas.y -= 0.5;
-	pass
+	pass # /moveUp
 
 	def moveLeft(self):
 		self.oGame.oPlayer.left();
-		#self.oGame.oCanvas.x -= 0.5;
-	pass
+	pass # /moveLeft
 
 	def moveRight(self):
 		self.oGame.oPlayer.right();
-		#self.oGame.oCanvas.x += 0.5;
-	pass
+	pass #/ moveRight
 
 	def keyPressed(self, key, val):
 		if self.KEY[key] == val :
 			return True;
 		return False;
+	pass # /keyPressed
+
+	def displayScore(self, score):
+		self.oScoreBar.set_text("Wynik: %d" % score);
+	pass
+
+	def displayLifes(self, lifes):
+		self.oLifeBar.set_text("Życia: %d" % lifes);
 	pass
 
 pass # klasa
