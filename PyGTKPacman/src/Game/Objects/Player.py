@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from Game.Objects.Character import Character
 from Character import *
 
 __version__ = "0.1";
