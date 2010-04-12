@@ -24,7 +24,7 @@ class Game:
 	};
 	PLAYGROUND_SIZE = {
 		'width'  : 600,
-		'height' : 540
+		'height' : 560
 	};
 	oCanvas	= None;
 	oPlayer = None;

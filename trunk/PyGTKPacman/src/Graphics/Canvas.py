@@ -54,7 +54,7 @@ class Canvas(gtk.DrawingArea):
 		y = self._oPlayer.getY();
 		cr = self.getContext();
 		cr.set_line_width(4)
-		cr.arc(x, y, 20, 0, 2 * math.pi)
+		cr.arc(x, y, 16, 0, 2 * math.pi)
 		cr.stroke_preserve()
 		cr.set_source_rgb(1, 1, 1)
 		cr.fill()
@@ -106,23 +106,50 @@ class Canvas(gtk.DrawingArea):
 		pass
 	pass
 
-	def _drawBackground(self) :
+	def _drawRectangle(self, x, y, w, h, r, g, b):
 		cr = self.getContext();
-		cr.set_source_rgb(0.5, 0.5, 0.5);
-		cr.rectangle(0, 0, self.getWidth(), self.getHeight());
+		cr.set_source_rgb(r, g, b);
+		cr.rectangle(x, y, w, h);
 		cr.fill()
+		pass
 	pass
 
-	def _drawWals(self):
-		cr = self.getContext();
-		cr.move_to(10, 10);
-		cr.line_to(30, 30);
-		cr.stroke();
+	def _drawBackground(self, r, g, b) :
+		self._drawRectangle(0, 0, self.getWidth(), self.getHeight(), r, g, b);
+	pass
+
+	def _drawWall(self, x, y, w, h):
+		self._drawRectangle(x, y, w, h, 0, 0, 0);
+	pass
+
+	def _drawVerticalWall(self, x, y, h):
+		start_x = x * 40;
+		start_y = y * 40;
+		height  = h * 40;
+		self._drawWall(start_x, start_y, 40, height);
+	pass
+
+	def _drawHorizontalWall(self, x, y, h):
+		start_x = x * 40;
+		start_y = y * 40;
+		width = h * 40;
+		self._drawWall(start_x, start_y, width, 40);
+	pass
+
+	def _drawWalls(self):
+		self._drawVerticalWall(1, 1, 12);
+		self._drawVerticalWall(3, 1, 12);
+		self._drawVerticalWall(5, 1, 12);
+		self._drawVerticalWall(7, 1, 12);
+		self._drawVerticalWall(9, 1, 12);
+		self._drawVerticalWall(11, 1, 12);
+		self._drawVerticalWall(13, 1, 12);
+		self._drawVerticalWall(15, 1, 12);
 	pass
 
 	def expose(self, *args):
-		self._drawBackground();
-		self._drawWals();
+		self._drawBackground(0.5, 0.5, 0.5);
+		self._drawWalls();
 		self._drawCookies();
 		self._drawEnemies();
 		self._drawPlayer();
