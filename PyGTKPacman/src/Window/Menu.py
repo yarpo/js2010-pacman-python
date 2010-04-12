@@ -37,13 +37,13 @@ class Menu :
 	def _settings(self, button, widget, data=None) :
 		defaults = self.oWindow.oGame.DEFAULTS;
 		self.oSettings = Options()\
-				.add(	'iLives',
+				.add(	'iLifes',
 						label = "Liczba żyć",
-						value = defaults['iLives'],
+						value = defaults['iLifes'],
 						style="integer(lower=0, upper = 5)")\
 				.add(	'iEnemies',
 						label = "Liczba wrogów",
-						value = defaults['iLives'],
+						value = defaults['iEnemies'],
 						style="integer(lower=0, upper = 10)");
 		create_gtk_dialog(self.oSettings).run();
 	pass
