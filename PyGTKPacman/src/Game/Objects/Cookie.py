@@ -10,7 +10,7 @@ from Object import *
 class Cookie(Object) :
 
 	_TYPE = {
-		'normal' : 0;
+		'normal' : 0,
 		'extra'  : 1
 	};
 	_type = 0;
