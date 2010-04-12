@@ -10,17 +10,18 @@ __date__    = "$2010-04-11 18:05:03$";
 
 class Player(Character) :
 
-	_x = 0;
-	_y = 0;
-	_bSuperPower = False;
-	_iScore  = 0;
+	_x      = 0;
+	_y      = 0;
+	_iScore = 0;
 	_iLifes = 0
-	POINTS = 10;
+	POINTS  = 10;
+	_bSuperPower = False;
 
 	def __init__(self, x, y, lifes):
 		Character.__init__(self, x, y);
 		self._iLifes = lifes;
 		self._iScore = 0;
+		self.noSuperPower();
 	pass
 
 	def hasSuperPower(self):
@@ -41,6 +42,10 @@ class Player(Character) :
 
 	def addScore(self) :
 		self._iScore += self.POINTS;
+	pass
+
+	def getLifes(self) :
+		return self._iLifes;
 	pass
 
 	def die(self):

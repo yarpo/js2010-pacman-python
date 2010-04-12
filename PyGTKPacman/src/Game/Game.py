@@ -38,6 +38,8 @@ class Game:
 
 	def _redraw(self):
 		self.oCanvas.redraw(self);
+		self._displayLifes();
+		self._displayScore();
 	pass # /_redraw
 
 	def _gameLoop(self):
@@ -88,8 +90,12 @@ class Game:
 		self._isRunning = False;
 	pass #/stop
 
-	def _setScore(self):
-		self.oWindow.setScore(self.oPlayer.getScore());
+	def _displayScore(self):
+		self.oWindow.displayScore(self.oPlayer.getScore());
+	pass
+
+	def _displayLifes(self):
+			self.oWindow.displayLifes(self.oPlayer.getLifes());
 	pass
 
 pass # /Game
