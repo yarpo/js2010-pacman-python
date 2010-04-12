@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 from Graphics.Canvas import *
+from Objects.Character import *
 from Objects.Player import *
 from Window.Window import *
 import gobject
 import pygtk
-
 
 pygtk.require('2.0');
 
@@ -17,8 +17,12 @@ __date__    = "$2010-04-11 13:05:03$";
 class Game:
 
 	DEFAULTS = {
-				'iLives' : 3,
-				'iEnemies' :3
+		'iLifes' : 3,
+		'iEnemies' : 3
+	};
+	PLAYGROUND_SIZE = {
+		'width'  : 600,
+		'height' : 550
 	};
 	oCanvas	= None;
 	oPlayer = None;
@@ -28,15 +32,12 @@ class Game:
 	_isRunning = False;
 
 	def __init__(self, title, size):
-		self.oCanvas = Canvas();
+		self.oCanvas = Canvas(self.PLAYGROUND_SIZE);
 		self.oWindow = Window(title, size, self);
  	pass # /__init__
 
 	def _redraw(self):
-		self.oCanvas.drawPlayer(self.oPlayer);
-		self.oCanvas.drawEnemies(self.oEnemies);
-		self.oCanvas.drawCookies(self.oCookies);
-		self.oCanvas.draw();
+		self.oCanvas.redraw(self);
 	pass # /_redraw
 
 	def _gameLoop(self):
@@ -55,7 +56,8 @@ class Game:
 	pass
 
 	def _createWorld(self):
-		self.oPlayer = Player(100, 100);
+		Character.setPlaygroundBounds(self.PLAYGROUND_SIZE);
+		self.oPlayer = Player(100, 100, self.DEFAULTS['iLifes']);
 		self.oEnemies = self._createEnemies()
 		self.oCookies = self._createCookies();
 	pass #/_createWorld
@@ -85,6 +87,10 @@ class Game:
 	def stop(self) :
 		self._isRunning = False;
 	pass #/stop
+
+	def _setScore(self):
+		self.oWindow.setScore(self.oPlayer.getScore());
+	pass
 
 pass # /Game
 
