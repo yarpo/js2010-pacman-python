@@ -12,22 +12,39 @@ class Player(Character) :
 
 	_x = 0;
 	_y = 0;
-	_superPower = False;
+	_bSuperPower = False;
+	_iScore  = 0;
+	_iLifes = 0
+	POINTS = 10;
 
-	def __init__(self, x, y):
+	def __init__(self, x, y, lifes):
 		Character.__init__(self, x, y);
+		self._iLifes = lifes;
+		self._iScore = 0;
 	pass
 
 	def hasSuperPower(self):
-		return self._superPower;
+		return self._bSuperPower;
 	pass
 
 	def giveSuperPower(self):
-		self._superPower = True;
+		self._bSuperPower = True;
 	pass
 
 	def noSuperPower(self):
-		self._superPower = False;
+		self._bSuperPower = False;
+	pass
+
+	def getScore(self) :
+		return self._iScore;
+	pass
+
+	def addScore(self) :
+		self._iScore += self.POINTS;
+	pass
+
+	def die(self):
+		self._iLifes -= 1;
 	pass
 
 pass
