@@ -39,9 +39,9 @@ class Canvas(gtk.DrawingArea):
 	pass
 
 	def redraw(self, game):
-		self.drawPlayer(game.oPlayer);
-		self.drawEnemies(game.oEnemies);
 		self.drawCookies(game.oCookies);
+		self.drawEnemies(game.oEnemies);
+		self.drawPlayer(game.oPlayer);
 		self.draw();
 	pass
 
@@ -102,9 +102,9 @@ class Canvas(gtk.DrawingArea):
 
 	def expose(self, *args):
 		self._drawBackground();
-		self._drawPlayer();
-		self._drawEnemies();
 		self._drawCookies();
+		self._drawEnemies();
+		self._drawPlayer();
 		self._reset();
 	pass
 	
